@@ -4,7 +4,10 @@ import os
 import re
 import sys
 import spacy
-nlp = spacy.load("en_core_web_sm")
+from spacy_download import load_spacy
+
+# Will download the model if it isn't installed yet
+nlp = load_spacy("en_core_web_sm")  
 
 total_name_count = 0
 total_date_count = 0

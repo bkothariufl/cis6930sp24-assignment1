@@ -1,0 +1,1 @@
+there was an issue with loading the spacy model. Used help to load it. https://github.com/BramVanroy/spacy_download
