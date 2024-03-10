@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import spacy
+import pyap
 from spacy_download import load_spacy
 
 # Will download the model if it isn't installed yet
@@ -20,7 +21,7 @@ def censor_file(file_path, censor_names, censor_dates, censor_phones, censor_add
         with open(file_path, 'r') as file:
             content = file.read()
 
-        doc = nlp(content)
+        
         replacements = {
             'PERSON': '[NAME]',
             'DATE': '[DATE]',
@@ -33,22 +34,38 @@ def censor_file(file_path, censor_names, censor_dates, censor_phones, censor_add
         file_address_count = 0
         file_phone_count = 0
 
+        if censor_address:
+            addresses = pyap.parse(content, country='US')
+            for address in addresses:
+                # print(address)
+                count=0
+                content, count = content.replace(address.full_address, '███', 1), count + 1
+                file_address_count += count
+        doc = nlp(content)
+
         if censor_names or censor_dates or censor_address:
             for ent in doc.ents:
-                print(ent.text, ent.start_char, ent.end_char, ent.label_)
+                # print(ent.text, ent.start_char, ent.end_char, ent.label_)
                 if ent.label_ == 'PERSON' and censor_names:
-                    print("Censoring Person: "+ent.text)
+                    # print("Censoring Person: "+ent.text)
                     content = content.replace(ent.text, '███')
                     file_name_count += 1
                 elif (ent.label_ == 'DATE' or ent.label_=='TIME') and censor_dates:
-                    print("Censoring Date: "+ent.text)
+                    # print("Censoring Date: "+ent.text)
                     content = content.replace(ent.text, '███')
                     file_date_count += 1
                 elif (ent.label_ == 'GPE' or ent.label_ =='FAC') and censor_address:
-                    print("Censoring Address: "+ent.text)
+                    # print("Censoring Address: "+ent.text)
                     content = content.replace(ent.text, '███')
                     file_address_count += 1
-                print("----------------------------------------------------------------")
+                # print("----------------------------------------------------------------")
+        # if censor_address:
+        #     addresses = pyap.parse(content, country='US')
+        #     for address in addresses:
+        #         # print(address)
+        #         count=0
+        #         content, count = content.replace(address.full_address, '███', 1), count + 1
+        #         file_address_count += count
 
         if censor_phones:
             phone_regex = r'(\+\d{1,3}\s?)?(?:\(\d{1,}\)[\s.-]?)?\d{3,}[\s.-]?\d{3,}[\s.-]?\d{3,}'
