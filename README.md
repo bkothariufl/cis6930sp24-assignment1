@@ -14,10 +14,12 @@ On an ubuntu server:
 curl https://pyenv.run | bash
 pyenv install 3.11
 pyenv global 3.11
-pipenv install pypdf 
 pipenv install --dev pytest
-pipenv install spacyrun 
+pipenv install spacy
 
 
 ## How to run
 pipenv run python censoror.py --input '*.txt' --names --dates --phones --address --output 'files/' --stats stderr
+
+
+## censor.py Function Descriptions
