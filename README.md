@@ -9,6 +9,9 @@ Design a system which accepts plain text documents then detects and censors “s
 
 Censor flags to be used: --names, --dates, --phones, --address 
 
+
+
+
 ## How to install
 On an ubuntu server: 
 curl https://pyenv.run | bash
@@ -22,10 +25,15 @@ pipenv install spacy
 pipenv run python censoror.py --input '*.txt' --names --dates --phones --address --output 'files/' --stats stderr
 
 
+<<<<<<< HEAD
+=======
+https://github.com/bkothariufl/cis6930sp24-assignment1/assets/151199302/383d5cde-246e-43cb-b75c-47b7dbb20e44
+>>>>>>> c32690baf40d57f9f107fc749b9bbf9a34b6f543
 
 
 
 ## censor.py Function Descriptions
+<<<<<<< HEAD
 
 ### `censor_file(file_path: str, censor_names: bool, censor_dates: bool, censor_phones: bool, censor_address: bool) -> str`
 
@@ -80,3 +88,5 @@ For censoring names, the first level censoring was done using spacy and then usi
 
 The phone numbers are censored using a regular expression.
 
+=======
+>>>>>>> c32690baf40d57f9f107fc749b9bbf9a34b6f543
