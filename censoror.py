@@ -35,19 +35,37 @@ def censor_file(file_path, censor_names, censor_dates, censor_phones, censor_add
 
         if censor_names or censor_dates or censor_address:
             for ent in doc.ents:
+                print(ent.text, ent.start_char, ent.end_char, ent.label_)
                 if ent.label_ == 'PERSON' and censor_names:
+                    print("Censoring Person: "+ent.text)
                     content = content.replace(ent.text, '███')
                     file_name_count += 1
-                elif ent.label_ == 'DATE' and censor_dates:
+                elif (ent.label_ == 'DATE' or ent.label_=='TIME') and censor_dates:
+                    print("Censoring Date: "+ent.text)
                     content = content.replace(ent.text, '███')
                     file_date_count += 1
-                elif ent.label_ == 'GPE' and censor_address:
+                elif (ent.label_ == 'GPE' or ent.label_ =='FAC') and censor_address:
+                    print("Censoring Address: "+ent.text)
                     content = content.replace(ent.text, '███')
                     file_address_count += 1
+                print("----------------------------------------------------------------")
 
         if censor_phones:
             phone_regex = r'(\+\d{1,3}\s?)?(?:\(\d{1,}\)[\s.-]?)?\d{3,}[\s.-]?\d{3,}[\s.-]?\d{3,}'
             content, file_phone_count = re.subn(phone_regex, '███', content)
+        
+        if censor_names:
+            pattern = r'(?<![@\w])\b[a-zA-Z]+(?:\.[a-zA-Z]+)+\b(?![a-zA-Z@])'
+            name_count_temp=0
+            content,name_count_temp = re.subn(pattern, '███', content, flags=re.IGNORECASE)
+            file_name_count+=name_count_temp
+            
+            name_count_temp=0
+            email_name_name_pattern = r'(\b[a-zA-Z]+(?:\.[a-zA-Z]+)+\b)@'
+            # Directly replace the 'name.name' part with '███' followed by '@'
+            content,name_count_temp = re.subn(email_name_name_pattern, '███@', content, flags=re.IGNORECASE)
+            file_name_count+=name_count_temp
+
         
         process_file_stats(file_path,censor_names,file_name_count,censor_address,file_address_count,censor_dates,file_date_count,censor_phones,file_phone_count)
       

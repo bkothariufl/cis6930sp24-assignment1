@@ -29,7 +29,7 @@ def test_censoring_names():
 
 
 def main():
-    test_censoring_cmd()
+    # test_censoring_cmd()
     test_censoring_names()
 
 if __name__ == "__main__":

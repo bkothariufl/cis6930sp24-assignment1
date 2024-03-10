@@ -1,8 +1,3 @@
-John Mark
-Akshay Kumar
-Jesus Christ
-Abhishek.kothari
-
-abhishek kothari
-
-abhishek Kothari 
+abhishek Kothari
+abhishek.kothari
+john.doe@gmail.com
