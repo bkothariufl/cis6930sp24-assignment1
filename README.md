@@ -9,6 +9,9 @@ Design a system which accepts plain text documents then detects and censors “s
 
 Censor flags to be used: --names, --dates, --phones, --address 
 
+
+
+
 ## How to install
 On an ubuntu server: 
 curl https://pyenv.run | bash
@@ -20,6 +23,10 @@ pipenv install spacy
 
 ## How to run
 pipenv run python censoror.py --input '*.txt' --names --dates --phones --address --output 'files/' --stats stderr
+
+
+https://github.com/bkothariufl/cis6930sp24-assignment1/assets/151199302/383d5cde-246e-43cb-b75c-47b7dbb20e44
+
 
 
 ## censor.py Function Descriptions
