@@ -24,16 +24,11 @@ pipenv install spacy
 ## How to run
 pipenv run python censoror.py --input '*.txt' --names --dates --phones --address --output 'files/' --stats stderr
 
-
-<<<<<<< HEAD
-=======
 https://github.com/bkothariufl/cis6930sp24-assignment1/assets/151199302/383d5cde-246e-43cb-b75c-47b7dbb20e44
->>>>>>> c32690baf40d57f9f107fc749b9bbf9a34b6f543
 
 
 
 ## censor.py Function Descriptions
-<<<<<<< HEAD
 
 ### `censor_file(file_path: str, censor_names: bool, censor_dates: bool, censor_phones: bool, censor_address: bool) -> str`
 
@@ -87,6 +82,3 @@ I observed that the spacy library was not highly efficient in identifying addres
 For censoring names, the first level censoring was done using spacy and then using regular expressions especially in the instances where the name was formatted like firstName.lastName or fN.ln@EMAIL.COM. 
 
 The phone numbers are censored using a regular expression.
-
-=======
->>>>>>> c32690baf40d57f9f107fc749b9bbf9a34b6f543
